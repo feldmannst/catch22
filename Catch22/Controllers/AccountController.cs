@@ -135,7 +135,12 @@ namespace Catch22.Controllers
                 : "";
             ViewBag.HasLocalPassword = HasPassword();
             ViewBag.ReturnUrl = Url.Action("Manage");
-            return View();
+            UpdateProfileViewModel model = new UpdateProfileViewModel();
+            var user = db.Users.Where(a => a.UserName == User.Identity.Name).Single();
+            model.Email = user.Email;
+            model.PhoneNumber = user.PhoneNumber;
+            model.ManageViewModel = new ManageUserViewModel();
+            return View(model);
         }
 
         [HttpPost]
@@ -153,8 +158,6 @@ namespace Catch22.Controllers
                     if (result.Succeeded)
                     {
                         var user = await userManager.FindByNameAsync(User.Identity.GetUserName());
-                        user.Email = model.Email;
-                        user.PhoneNumber = model.PhoneNumber;
                         return RedirectToAction("Manage", new { Manage = ManageMessageId.ChangePasswordSuccess });
                     }
                     else
@@ -177,8 +180,6 @@ namespace Catch22.Controllers
                     if (result.Succeeded)
                     {
                         var user = await userManager.FindByNameAsync(User.Identity.GetUserName());
-                        user.Email = model.Email;
-                        user.PhoneNumber = model.PhoneNumber;
                         return RedirectToAction("Manage", new { Manage = ManageMessageId.ChangePasswordSuccess });
                     }
                     else
@@ -187,17 +188,35 @@ namespace Catch22.Controllers
                     }
                 }
             }
-
-            return View(model);
+            UpdateProfileViewModel viewModel = new UpdateProfileViewModel();
+            var userd = db.Users.Where(a => a.UserName == User.Identity.Name).Single();
+            viewModel.Email = userd.Email;
+            viewModel.PhoneNumber = userd.PhoneNumber;
+            viewModel.ManageViewModel = model;
+            return View(viewModel);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        public ActionResult UpdateProfile(UpdateProfileViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = db.Users.Where(a => a.UserName == User.Identity.Name).Single();
+                user.Email = model.Email;
+                user.PhoneNumber = model.PhoneNumber;
+                db.Entry(user).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Manage");
+            }
+            return View(model);
+        }
+
         public ActionResult LogOff()
         {
             var authenticationManager = HttpContext.GetOwinContext().Authentication;
             authenticationManager.SignOut();
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "CMS");
         }
 
         public async Task SignInAsync(User user, bool isPersistent)
@@ -227,7 +246,7 @@ namespace Catch22.Controllers
             }
             else
             {
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index", "CMS");
             }
         }
 

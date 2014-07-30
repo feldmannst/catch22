@@ -40,11 +40,16 @@ namespace Catch22.Models
         [Compare("NewPassword", ErrorMessage =
             "The new password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+    }
 
+    public class UpdateProfileViewModel
+    {
         public string PhoneNumber { get; set; }
 
         [Required]
         public string Email { get; set; }
+
+        public ManageUserViewModel ManageViewModel { get; set; }
     }
 
     public class RegisterViewModel

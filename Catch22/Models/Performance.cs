@@ -11,11 +11,14 @@ namespace Catch22.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     
     public partial class Performance
     {
         public int PerformanceID { get; set; }
         public string PerformanceName { get; set; }
+
+        [DisplayFormat(DataFormatString="{0:MM/dd/yyyy}", ApplyFormatInEditMode=true)]
         public System.DateTime PerformanceDate { get; set; }
         public string PerformanceTime { get; set; }
         public string Location { get; set; }

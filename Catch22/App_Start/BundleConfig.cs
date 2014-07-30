@@ -21,13 +21,28 @@ namespace Catch22
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.js",
-                      "~/Scripts/swipe.js",
-                      "~/Scripts/mainPage.js",
                       "~/Scripts/respond.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/mainsite").Include(
+                      "~/Scripts/swipe.js",
+                      "~/Scripts/mainPage.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
+                      "~/Content/css/font-awesome.css",
                       "~/Content/site.css"));
+
+            bundles.Add(new StyleBundle("~/Content/cssCMS").Include(
+                      "~/Content/bootstrap.css",
+                      "~/Content/css/font-awesome.css",
+                      "~/Content/themes/base/jquery.ui.all.css",
+                      "~/Content/admin-custom.css"));
+
+            bundles.Add(new ScriptBundle("~/bundles/jqueryui").Include(
+                "~/Scripts/jquery-ui-1.10.4.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/admin-custom").Include(
+                "~/Scripts/admin-custom.js"));
         }
     }
 }

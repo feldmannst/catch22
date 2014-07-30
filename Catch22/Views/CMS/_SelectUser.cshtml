@@ -1,0 +1,8 @@
+﻿@model IEnumerable<SelectListItem>
+
+<div class="row">
+    @Html.DropDownList("selectUser", Model, new { @class = "form-control", style = "width: 200px" })
+    <br />
+    <input type="submit" value="Update" id="changeMember" class="btn btn-default" />
+</div>
+

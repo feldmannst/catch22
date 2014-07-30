@@ -11,11 +11,17 @@ namespace Catch22.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     
     public partial class News
     {
         public int NewsID { get; set; }
+
+        [Display(Name = "News Text")]
         public string NewsText { get; set; }
+        
+        [Display(Name = "Expiration Date")]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode=true)]
         public System.DateTime ExpirationDate { get; set; }
         public int UserID { get; set; }
     
