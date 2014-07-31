@@ -27,12 +27,12 @@ namespace Catch22
                       "~/Scripts/swipe.js",
                       "~/Scripts/mainPage.js"));
 
-            bundles.Add(new StyleBundle("~/Content/cssMain").Include(
+            bundles.Add(new StyleBundle("~/bundles/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/css/font-awesome.css",
                       "~/Content/Site.css"));
 
-            bundles.Add(new StyleBundle("~/Content/cssCMS").Include(
+            bundles.Add(new StyleBundle("~/bundles/cssCMS").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/css/font-awesome.css",
                       "~/Content/themes/base/jquery.ui.all.css",
