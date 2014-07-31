@@ -75,9 +75,9 @@ namespace Catch22.Controllers
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
-            if (User.Identity.IsAuthenticated)
+            if (HttpContext.Request.IsAuthenticated)
             {
-                RedirectToAction("Index", "CMS");
+                return RedirectToAction("Index", "CMS");
             }
             ViewBag.ReturnUrl = returnUrl;
             return View();
